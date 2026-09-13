@@ -95,22 +95,22 @@
 
     h1 {
         color: var(--primary-dark);
-        font-size: 1.9rem;
-        margin: 0 0 10px 0;
+        font-size: 1.8rem;
+        margin: 0 0 8px 0;
         font-weight: 800;
         letter-spacing: -0.025em;
     }
 
     h2 {
         color: var(--text-main);
-        font-size: 1.15rem;
-        margin: 0 0 10px 0;
+        font-size: 1.1rem;
+        margin: 0 0 8px 0;
         line-height: 1.3;
         font-weight: 700;
     }
 
     p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         line-height: 1.4;
         color: var(--text-muted);
         margin: 4px 0;
@@ -118,7 +118,7 @@
 
     ul {
         text-align: left;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         line-height: 1.4;
         color: var(--text-main);
         margin: 4px 0 10px 18px;
@@ -126,19 +126,19 @@
     }
 
     li {
-        margin-bottom: 4px;
+        margin-bottom: 3px;
     }
 
     .btn-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 6px;
-        margin-top: 8px;
+        gap: 5px;
+        margin-top: 6px;
     }
 
     button {
-        font-size: 0.9rem;
-        padding: 9px 13px;
+        font-size: 0.85rem;
+        padding: 8px 12px;
         border: 2px solid #e2e8f0;
         border-radius: 10px;
         cursor: pointer;
@@ -174,9 +174,9 @@
         color: white;
         text-align: center;
         display: inline-block;
-        margin-top: 10px;
+        margin-top: 8px;
         border: none;
-        padding: 10px 24px;
+        padding: 9px 22px;
         border-radius: 10px;
         font-weight: 600;
         align-self: flex-start;
@@ -192,26 +192,26 @@
     .badge {
         background: #e0e7ff;
         color: var(--primary-dark);
-        padding: 4px 10px;
+        padding: 3px 10px;
         border-radius: 20px;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         display: inline-block;
-        margin-bottom: 6px;
+        margin-bottom: 5px;
     }
 
     .timer-container {
         display: flex;
         align-items: center;
         gap: 8px;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
 
     .timer-bar-wrapper {
         flex-grow: 1;
-        height: 6px;
+        height: 5px;
         background: #e2e8f0;
         border-radius: 3px;
         overflow: hidden;
@@ -226,17 +226,17 @@
 
     .timer-text {
         font-weight: 700;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         color: var(--accent);
-        min-width: 30px;
+        min-width: 28px;
     }
 
     .grade-card {
         background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         border: 2px solid var(--primary);
         border-radius: 16px;
-        padding: 15px 25px;
-        margin: 10px 0;
+        padding: 12px 20px;
+        margin: 8px 0;
         box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     }
 </style>
@@ -252,11 +252,12 @@
                 <div>
                     <span class="badge">Интерактивный тест</span>
                     <h1>БЖД и Наука</h1>
-                    <p><strong>Правила игры:</strong></p>
+                    <p><strong>Правила викторины:</strong></p>
                     <ul style="margin-left: 0; padding-left: 18px;">
-                        <li>На каждый вопрос дается ровно <strong>10 секунд</strong>.</li>
-                        <li>При правильном ответе кнопка подсветится зеленым, при ошибке — красным.</li>
-                        <li>В конце вы получите объективную школьную оценку (от 2 до 5).</li>
+                        <li>В викторине ровно <strong>8 вопросов</strong>.</li>
+                        <li>На каждый вопрос дается <strong>10 секунд</strong>.</li>
+                        <li>После ответа открывается слайд с подробным объяснением.</li>
+                        <li>В конце вы получите оценку от 2 до 5.</li>
                     </ul>
                 </div>
                 <button class="btn-next" onclick="startQuiz()">Начать викторину &rarr;</button>
@@ -265,26 +266,26 @@
         </div>
     </div>
 
-    <!-- Slide 2: Q1 (Amphibian Bus) -->
+    <!-- Slide 2: Q1 (Космос) -->
     <div class="slide" id="slide2" data-question="true">
         <div class="split-layout">
             <div class="content-side">
                 <div>
-                    <span class="badge">Вопрос 1 • Транспорт</span>
+                    <span class="badge">Вопрос 1 из 8 • Космос</span>
                     <div class="timer-container">
                         <div class="timer-text"><span id="t2">10</span>с</div>
                         <div class="timer-bar-wrapper"><div class="timer-bar" id="b2"></div></div>
                     </div>
-                    <h2>На какой фотографии изображен автобус-амфибия?</h2>
+                    <h2>Какой космический фактор оказывает наибольшее влияние на безопасность пилотируемых полетов?</h2>
                 </div>
                 <div class="btn-grid">
-                    <button class="btn-option" onclick="handleAnswer(this, false, 3)">A) Футуристический белый автобус</button>
-                    <button class="btn-option" onclick="handleAnswer(this, true, 3)">Б) Желтый автобус, плывущий по воде</button>
-                    <button class="btn-option" onclick="handleAnswer(this, false, 3)">В) Красный автобус на гусеницах</button>
-                    <button class="btn-option" onclick="handleAnswer(this, false, 3)">Г) Двухэтажный прозрачный автобус</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 3)">A) Солнечные затмения</button>
+                    <button class="btn-option" onclick="handleAnswer(this, true, 3)">Б) Космическая радиация и микрометеориты</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 3)">В) Отсутствие интернета на орбите</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 3)">Г) Притяжение Луны</button>
                 </div>
             </div>
-            <div class="image-side" style="background-image: url('photo_5276451857142326184_y.jpg');"></div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326120_y.jpg');"></div>
         </div>
     </div>
 
@@ -293,36 +294,36 @@
         <div class="split-layout">
             <div class="content-side">
                 <div>
-                    <span class="badge">Факты</span>
-                    <h2>Автобус-амфибия</h2>
-                    <p>Совмещает функции городского транспорта и судна. Широко используется для экскурсий по рекам и каналам городов мира (например, в Роттердаме).</p>
+                    <span class="badge">Пояснение к вопросу 1</span>
+                    <h2>Космическая безопасность</h2>
+                    <p>Космическая радиация (солнечные протонные события, галактические лучи) и техногенный мусор с микрометеоритами представляют главную угрозу для экипажей и космических аппаратов.</p>
                 </div>
                 <button class="btn-next" onclick="nextSlide(4)">Следующий вопрос &rarr;</button>
             </div>
-            <div class="image-side" style="background-image: url('photo_5276451857142326184_y.jpg');"></div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326120_y.jpg');"></div>
         </div>
     </div>
 
-    <!-- Slide 4: Q2 (Ernst Haeckel) -->
+    <!-- Slide 4: Q2 (Лесные пожары) -->
     <div class="slide" id="slide4" data-question="true">
         <div class="split-layout">
             <div class="content-side">
                 <div>
-                    <span class="badge">Вопрос 2 • Наука</span>
+                    <span class="badge">Вопрос 2 из 8 • Экология и ЧС</span>
                     <div class="timer-container">
                         <div class="timer-text"><span id="t4">10</span>с</div>
                         <div class="timer-bar-wrapper"><div class="timer-bar" id="b4"></div></div>
                     </div>
-                    <h2>Какой немецкий биолог в 1866 году впервые ввел в науку термин «экология»?</h2>
+                    <h2>Какой антропогенный фактор чаще всего становится причиной масштабных лесных пожаров?</h2>
                 </div>
                 <div class="btn-grid">
-                    <button class="btn-option" onclick="handleAnswer(this, false, 5)">A) Луи Пастер</button>
-                    <button class="btn-option" onclick="handleAnswer(this, false, 5)">Б) Чарльз Дарвин</button>
-                    <button class="btn-option" onclick="handleAnswer(this, true, 5)">В) Эрнст Геккель</button>
-                    <button class="btn-option" onclick="handleAnswer(this, false, 5)">Г) Владимир Вернадский</button>
+                    <button class="btn-option" onclick="handleAnswer(this, true, 5)">A) Непотушенный костер и человеческая халатность</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 5)">Б) Падение метеоритов</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 5)">В) Подземная вулканическая активность</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 5)">Г) Миграция диких животных</button>
                 </div>
             </div>
-            <div class="image-side" style="background-image: url('photo_5276451857142326289_x.jpg');"></div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326184_y.jpg');"></div>
         </div>
     </div>
 
@@ -331,36 +332,36 @@
         <div class="split-layout">
             <div class="content-side">
                 <div>
-                    <span class="badge">Факты</span>
-                    <h2>Эрнст Геккель</h2>
-                    <p>Ввел термин «экология» (от греч. oikos — дом) в 1866 году в книге «Всеобщая морфология организмов», активно продвигал идеи эволюционизма.</p>
+                    <span class="badge">Пояснение к вопросу 2</span>
+                    <h2>Лесные пожары по вине человека</h2>
+                    <p>До 90% лесных пожаров происходят из-за антропогенных факторов: неосторожного обращения с огнем, брошенных окурков и несоблюдения правил пожарной безопасности в лесу.</p>
                 </div>
                 <button class="btn-next" onclick="nextSlide(6)">Следующий вопрос &rarr;</button>
             </div>
-            <div class="image-side" style="background-image: url('photo_5276451857142326289_x.jpg');"></div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326184_y.jpg');"></div>
         </div>
     </div>
 
-    <!-- Slide 6: Q3 (Louis Pasteur) -->
+    <!-- Slide 6: Q3 (Сель) -->
     <div class="slide" id="slide6" data-question="true">
         <div class="split-layout">
             <div class="content-side">
                 <div>
-                    <span class="badge">Вопрос 3 • Микробиология</span>
+                    <span class="badge">Вопрос 3 из 8 • Природные ЧС</span>
                     <div class="timer-container">
                         <div class="timer-text"><span id="t6">10</span>с</div>
                         <div class="timer-bar-wrapper"><div class="timer-bar" id="b6"></div></div>
                     </div>
-                    <h2>Кто является основоположником микробиологии и иммунологии (вакцины от бешенства и сибирской язвы)?</h2>
+                    <h2>Как называется стремительный горный поток воды, несущий в себе огромное количество обломков горных пород и грязи?</h2>
                 </div>
                 <div class="btn-grid">
-                    <button class="btn-option" onclick="handleAnswer(this, false, 7)">A) Роберт Кох</button>
-                    <button class="btn-option" onclick="handleAnswer(this, false, 7)">Б) Александр Флеминг</button>
-                    <button class="btn-option" onclick="handleAnswer(this, true, 7)">В) Луи Пастер</button>
-                    <button class="btn-option" onclick="handleAnswer(this, false, 7)">Г) Дмитрий Ивановский</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 7)">A) Цунами</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 7)">Б) Лавина</button>
+                    <button class="btn-option" onclick="handleAnswer(this, true, 7)">В) Сель</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 7)">Г) Паводок</button>
                 </div>
             </div>
-            <div class="image-side" style="background-image: url('photo_5276451857142326290_m.jpg');"></div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326184_y.jpg');"></div>
         </div>
     </div>
 
@@ -369,36 +370,36 @@
         <div class="split-layout">
             <div class="content-side">
                 <div>
-                    <span class="badge">Факты</span>
-                    <h2>Луи Пастер</h2>
-                    <p>Доказал микробиологическую природу брожения, разработал метод пастеризации и создал первые эффективные вакцины против бешенства и сибирской язвы.</p>
+                    <span class="badge">Пояснение к вопросу 3</span>
+                    <h2>Поток воды — Сель</h2>
+                    <p>Сель внезапно возникает в руслах горных рек в результате интенсивных дождей, бурного таяния ледников или землетрясений, обладая колоссальной разрушительной силой.</p>
                 </div>
                 <button class="btn-next" onclick="nextSlide(8)">Следующий вопрос &rarr;</button>
             </div>
-            <div class="image-side" style="background-image: url('photo_5276451857142326290_m.jpg');"></div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326184_y.jpg');"></div>
         </div>
     </div>
 
-    <!-- Slide 8: Q4 (Fire Safety / Кошма) -->
+    <!-- Slide 8: Q4 (Человеческий фактор) -->
     <div class="slide" id="slide8" data-question="true">
         <div class="split-layout">
             <div class="content-side">
                 <div>
-                    <span class="badge">Вопрос 4 • Пожарная безопасность</span>
+                    <span class="badge">Вопрос 4 из 8 • Безопасность</span>
                     <div class="timer-container">
                         <div class="timer-text"><span id="t8">10</span>с</div>
                         <div class="timer-bar-wrapper"><div class="timer-bar" id="b8"></div></div>
                     </div>
-                    <h2>Какое противопожарное полотно из огнеупорной стеклоткани или брезента используется для тушения очагов?</h2>
+                    <h2>Что в концепции безопасности понимают под «человеческим фактором»?</h2>
                 </div>
                 <div class="btn-grid">
-                    <button class="btn-option" onclick="handleAnswer(this, false, 9)">A) Термощит</button>
-                    <button class="btn-option" onclick="handleAnswer(this, true, 9)">Б) Кошма</button>
-                    <button class="btn-option" onclick="handleAnswer(this, false, 9)">В) Одеяло-самоспас</button>
-                    <button class="btn-option" onclick="handleAnswer(this, false, 9)">Г) Брезентовый заслон</button>
+                    <button class="btn-option" onclick="handleAnswer(this, true, 9)">A) Психофизиологические особенности и ошибки оператора</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 9)">Б) Автоматическое отключение питания</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 9)">В) Заводской брак оборудования</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 9)">Г) Природные катаклизмы</button>
                 </div>
             </div>
-            <div class="image-side" style="background-image: url('Кошма брезентова.jpg');"></div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326120_y.jpg');"></div>
         </div>
     </div>
 
@@ -407,54 +408,168 @@
         <div class="split-layout">
             <div class="content-side">
                 <div>
-                    <span class="badge">Пояснение</span>
-                    <h2>Кошма</h2>
-                    <p>Кошма эффективно перекрывает доступ кислорода к очагу возгорания на начальной стадии или помогает сбить пламя с загоревшейся одежды.</p>
+                    <span class="badge">Пояснение к вопросу 4</span>
+                    <h2>Человеческий фактор</h2>
+                    <p>Это комплекс свойств человека (усталость, невнимательность, стресс, уровень квалификации), которые влияют на надежность управления техническими системами и могут приводить к авариям.</p>
                 </div>
                 <button class="btn-next" onclick="nextSlide(10)">Следующий вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326120_y.jpg');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Q5 (Термический ожог) -->
+    <div class="slide" id="slide10" data-question="true">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 5 из 8 • Первая помощь</span>
+                    <div class="timer-container">
+                        <div class="timer-text"><span id="t10">10</span>с</div>
+                        <div class="timer-bar-wrapper"><div class="timer-bar" id="b10"></div></div>
+                    </div>
+                    <h2>Каковы первые и самые необходимые действия при получении термического ожога кожи?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="handleAnswer(this, false, 11)">A) Смазать место маслом или жиром</button>
+                    <button class="btn-option" onclick="handleAnswer(this, true, 11)">Б) Охладить обожженный участок проточной холодной водой</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 11)">В) Проколоть появившиеся волдыри</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 11)">Г) Залепить пластырем</button>
+                </div>
             </div>
             <div class="image-side" style="background-image: url('Кошма брезентова.jpg');"></div>
         </div>
     </div>
 
-    <!-- Slide 10: Q5 (Teacher) -->
-    <div class="slide" id="slide10" data-question="true">
+    <!-- Slide 11: Q5 Explanation -->
+    <div class="slide" id="slide11">
         <div class="split-layout">
             <div class="content-side">
                 <div>
-                    <span class="badge">Вопрос 5 • Финал</span>
+                    <span class="badge">Пояснение к вопросу 5</span>
+                    <h2>Первая помощь при ожогах</h2>
+                    <p>Охлаждение водой (10–15 минут) уменьшает глубину повреждения тканей и снимает боль. Масла использовать категорически нельзя, так как они удерживают тепло.</p>
+                </div>
+                <button class="btn-next" onclick="nextSlide(12)">Следующий вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('Кошма брезентова.jpg');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Q6 (Ernst Haeckel) -->
+    <div class="slide" id="slide12" data-question="true">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 6 из 8 • Биология и Наука</span>
                     <div class="timer-container">
-                        <div class="timer-text"><span id="t10">10</span>с</div>
-                        <div class="timer-bar-wrapper"><div class="timer-bar" id="b10"></div></div>
+                        <div class="timer-text"><span id="t12">10</span>с</div>
+                        <div class="timer-bar-wrapper"><div class="timer-bar" id="b12"></div></div>
+                    </div>
+                    <h2>Какой выдающийся немецкий биолог в 1866 году опубликовал труд «Всеобщая морфология организмов» и ввел термин «экология»?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="handleAnswer(this, false, 13)">A) Луи Пастер</button>
+                    <button class="btn-option" onclick="handleAnswer(this, true, 13)">Б) Эрнст Геккель</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 13)">В) Чарльз Дарвин</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 13)">Г) Владимир Вернадский</button>
+                </div>
+            </div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326289_x.jpg');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 13: Q6 Explanation -->
+    <div class="slide" id="slide13">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Факты об ученом</span>
+                    <h2>Эрнст Геккель (1866)</h2>
+                    <p>В своем двухтомном сочинении «Всеобщая морфология организмов» он заложил основы новой науки, определив экологию как «всеобщее учение об отношении организма к внешней среде, куда мы можем отнести в широком смысле все „условия существования“».</p>
+                </div>
+                <button class="btn-next" onclick="nextSlide(14)">Следующий вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326289_x.jpg');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 14: Q7 (Louis Pasteur) -->
+    <div class="slide" id="slide14" data-question="true">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 7 из 8 • Микробиология</span>
+                    <div class="timer-container">
+                        <div class="timer-text"><span id="t14">10</span>с</div>
+                        <div class="timer-bar-wrapper"><div class="timer-bar" id="b14"></div></div>
+                    </div>
+                    <h2>Какой великий ученый в 1888 году открыл знаменитый научно-исследовательский центр для борьбы с инфекциями в Париже?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="handleAnswer(this, false, 15)">A) Роберт Кох</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 15)">Б) Александр Флеминг</button>
+                    <button class="btn-option" onclick="handleAnswer(this, true, 15)">В) Луи Пастер</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 15)">Г) Илья Мечников</button>
+                </div>
+            </div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326290_m.jpg');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 15: Q7 Explanation -->
+    <div class="slide" id="slide15">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Факты об ученом</span>
+                    <h2>Луи Пастер — Институт Пастера (1888)</h2>
+                    <p>Основал знаменитый научно-исследовательский центр для борьбы с инфекционными заболеваниями в Париже, совершив переворот в микробиологии, иммунологии и создав вакцины против бешенства и сибирской язвы.</p>
+                </div>
+                <button class="btn-next" onclick="nextSlide(16)">Следующий вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('photo_5276451857142326290_m.jpg');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 16: Q8 (Teacher) -->
+    <div class="slide" id="slide16" data-question="true">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 8 из 8 • Финал</span>
+                    <div class="timer-container">
+                        <div class="timer-text"><span id="t16">10</span>с</div>
+                        <div class="timer-bar-wrapper"><div class="timer-bar" id="b16"></div></div>
                     </div>
                     <h2>Как зовут преподавателя по дисциплине БЖД / БЖЧ?</h2>
                 </div>
                 <div class="btn-grid">
-                    <button class="btn-option" onclick="handleAnswer(this, false, 11)">A) Татьяна Николаевна</button>
-                    <button class="btn-option" onclick="handleAnswer(this, true, 11)">Б) Юлия Владимировна</button>
-                    <button class="btn-option" onclick="handleAnswer(this, false, 11)">В) Елена Александровна</button>
-                    <button class="btn-option" onclick="handleAnswer(this, false, 11)">Г) Ольга Сергеевна</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 17)">A) Татьяна Николаевна</button>
+                    <button class="btn-option" onclick="handleAnswer(this, true, 17)">Б) Юлия Владимировна</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 17)">В) Елена Александровна</button>
+                    <button class="btn-option" onclick="handleAnswer(this, false, 17)">Г) Ольга Сергеевна</button>
                 </div>
             </div>
             <div class="image-side" style="background-image: url('photo_5276451857142326120_y.jpg');"></div>
         </div>
     </div>
 
-    <!-- Slide 11: Final Results -->
-    <div class="slide" id="slide11">
+    <!-- Slide 17: Final Results -->
+    <div class="slide" id="slide17">
         <div class="full-layout">
             <div>
                 <span class="badge">Итоги тестирования</span>
                 <h1>Результаты викторины</h1>
-                <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">Вы ответили правильно на <span id="correctCount">0</span> из 5 вопросов.</p>
+                <p style="font-size: 1.05rem; font-weight: 600; color: var(--text-main);">Вы ответили правильно на <span id="correctCount">0</span> из 8 вопросов.</p>
                 
                 <div class="grade-card">
-                    <h2 style="margin: 0 0 6px 0; color: var(--primary-dark);">Ваша школьная оценка:</h2>
-                    <div id="finalGrade" style="font-size: 2.8rem; font-weight: 900; color: var(--primary);">—</div>
-                    <p id="gradeComment" style="margin: 6px 0 0 0; font-weight: 600;"></p>
+                    <h2 style="margin: 0 0 5px 0; color: var(--primary-dark);">Ваша школьная оценка:</h2>
+                    <div id="finalGrade" style="font-size: 2.6rem; font-weight: 900; color: var(--primary);">—</div>
+                    <p id="gradeComment" style="margin: 5px 0 0 0; font-weight: 600;"></p>
                 </div>
             </div>
-            <button class="btn-next" onclick="resetQuiz()" style="margin: 15px auto 0 auto; background: var(--success);">Пройти викторину заново ↺</button>
+            <button class="btn-next" onclick="resetQuiz()" style="margin: 12px auto 0 auto; background: var(--success);">Пройти викторину заново ↺</button>
         </div>
     </div>
 
@@ -465,7 +580,7 @@
     let score = 0;
     let timerInterval = null;
     let timeLeft = 10;
-    const totalQuestions = 5;
+    const totalQuestions = 8;
     let answeredCurrent = false;
 
     function showSlide(n) {
@@ -505,11 +620,15 @@
                 if (!answeredCurrent) {
                     answeredCurrent = true;
                     setTimeout(() => {
+                        // Автоматический переход на поясняющий слайд или следующий шаг
                         if (slideNum === 2) showSlide(3);
                         else if (slideNum === 4) showSlide(5);
                         else if (slideNum === 6) showSlide(7);
                         else if (slideNum === 8) showSlide(9);
-                        else if (slideNum === 10) { calculateGrade(); showSlide(11); }
+                        else if (slideNum === 10) showSlide(11);
+                        else if (slideNum === 12) showSlide(13);
+                        else if (slideNum === 14) showSlide(15);
+                        else if (slideNum === 16) { calculateGrade(); showSlide(17); }
                     }, 800);
                 }
             }
@@ -540,7 +659,7 @@
         });
 
         setTimeout(() => {
-            if (nextNum === 11) {
+            if (nextNum === 17) {
                 calculateGrade();
             }
             showSlide(nextNum);
@@ -548,7 +667,7 @@
     }
 
     function nextSlide(n) {
-        if (n === 11) {
+        if (n === 17) {
             calculateGrade();
         }
         showSlide(n);
@@ -557,21 +676,21 @@
     function calculateGrade() {
         document.getElementById('correctCount').innerText = score;
         let grade = 2;
-        let comment = "Нужно подучить материал!";
+        let comment = "Нужно повторить материал!";
         
         let percentage = score / totalQuestions;
         if (percentage >= 0.85) {
             grade = 5;
-            comment = "Великолепный результат! Вы эксперт!";
+            comment = "Великолепный результат! Отличное знание предмета!";
         } else if (percentage >= 0.7) {
             grade = 4;
-            comment = "Отличная работа, почти безупречно!";
+            comment = "Хорошая работа, крепкие знания!";
         } else if (percentage >= 0.5) {
             grade = 3;
-            comment = "Удовлетворительно, но есть куда расти.";
+            comment = "Удовлетворительно, но стоит повторить темы.";
         } else {
             grade = 2;
-            comment = "Попробуйте пройти еще раз внимательнее.";
+            comment = "Попробуйте пройти викторину еще раз.";
         }
 
         document.getElementById('finalGrade').innerText = grade;
