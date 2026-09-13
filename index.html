@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Интерактивная викторина: БЖД с иллюстрациями</title>
+<style>
+    :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --success: #16a34a;
+        --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+        --card-bg: #ffffff;
+        --text-main: #1e293b;
+        --text-muted: #475569;
+    }
+
+    body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        background: var(--bg-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        color: var(--text-main);
+    }
+
+    .presentation-box {
+        background: var(--card-bg);
+        width: 95%;
+        max-width: 1000px;
+        min-height: 560px;
+        border-radius: 24px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+    }
+
+    .slide {
+        display: none;
+        width: 100%;
+        height: 100%;
+        animation: fadeIn 0.4s ease-in-out forwards;
+        box-sizing: border-box;
+    }
+
+    .slide.active {
+        display: flex;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.99); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Split Screen Layout */
+    .split-layout {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        width: 100%;
+        height: 100%;
+        min-height: 560px;
+    }
+
+    .full-layout {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .content-side {
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+
+    .image-side {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        min-height: 100%;
+    }
+
+    .image-side::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, rgba(255,255,255,0.2), transparent);
+    }
+
+    h1 {
+        color: var(--primary);
+        font-size: 2.2rem;
+        margin: 0 0 15px 0;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+    }
+
+    h2 {
+        color: var(--text-main);
+        font-size: 1.4rem;
+        margin: 0 0 15px 0;
+        line-height: 1.35;
+        font-weight: 700;
+    }
+
+    p {
+        font-size: 1.05rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+        margin: 8px 0;
+    }
+
+    ul {
+        text-align: left;
+        font-size: 0.95rem;
+        line-height: 1.45;
+        color: var(--text-main);
+        margin: 5px 0 15px 18px;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 5px;
+    }
+
+    .btn-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    button {
+        font-size: 0.95rem;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 600;
+        text-align: left;
+        background: #f8fafc;
+        color: var(--text-main);
+    }
+
+    button.btn-option:hover {
+        background: #eff6ff;
+        border-color: var(--primary);
+        color: var(--primary);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+    }
+
+    .btn-next {
+        background: var(--primary);
+        color: white;
+        text-align: center;
+        display: inline-block;
+        margin-top: 15px;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 10px;
+        font-weight: 600;
+        align-self: flex-start;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-next:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .teacher-photo {
+        max-width: 150px;
+        border-radius: 12px;
+        margin: 10px auto;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        display: block;
+    }
+
+    .correct-header {
+        color: var(--success);
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        font-weight: 800;
+    }
+
+    .badge {
+        background: #dbeafe;
+        color: var(--primary);
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: inline-block;
+        margin-bottom: 8px;
+    }
+</style>
+</head>
+<body>
+
+<div class="presentation-box">
+
+    <!-- Slide 1 -->
+    <div class="slide active" id="slide1">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Введение в предмет</span>
+                    <h1>Безопасность жизнедеятельности</h1>
+                    <p style="font-size: 1.15rem; color: var(--text-main);">Изучение угроз, опасностей и эффективных способов защиты человека в повседневной жизни, на производстве и при чрезвычайных ситуациях.</p>
+                </div>
+                <button class="btn-next" onclick="showSlide(2)">Начать викторину &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d0fbb18f06f6?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" id="slide2">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 1 • Пожарная безопасность</span>
+                    <h2>Какое специализированное противопожарное покрывало из огнеупорного брезента или стеклоткани используется для первичного тушения?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="showSlide(3)">A) Термощит</button>
+                    <button class="btn-option" onclick="showSlide(3)">Б) Кошма</button>
+                    <button class="btn-option" onclick="showSlide(3)">В) Одеяло-самоспас</button>
+                    <button class="btn-option" onclick="showSlide(3)">Г) Брезентовый заслон</button>
+                </div>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1574360738628-9d47228801d0?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" id="slide3">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <div class="correct-header">✓ Правильный ответ: Б) Кошма</div>
+                    <p><strong>Описание:</strong> Огнеупорное покрывало из стеклоткани или брезента.</p>
+                    <p><strong>Применение:</strong></p>
+                    <ul>
+                        <li>Тушение огня на начальной стадии;</li>
+                        <li>Ликвидация горения одежды на человеке;</li>
+                        <li>Блокировка доступа кислорода к очагу.</li>
+                    </ul>
+                </div>
+                <button class="btn-next" onclick="showSlide(4)">Следующий вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide" id="slide4">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 2 • Экологическая безопасность</span>
+                    <h2>Какой процент лесных пожаров происходит по вине человека и из-за антропогенных факторов?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="showSlide(5)">A) Не более 20%</button>
+                    <button class="btn-option" onclick="showSlide(5)">Б) Около 50%</button>
+                    <button class="btn-option" onclick="showSlide(5)">В) Не менее 80%</button>
+                    <button class="btn-option" onclick="showSlide(5)">Г) Ровно 100%</button>
+                </div>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide" id="slide5">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <div class="correct-header">✓ Правильный ответ: В) Не менее 80%</div>
+                    <p><strong>Главные причины:</strong></p>
+                    <ul>
+                        <li>Непотушенные костры и брошенные окурки;</li>
+                        <li>Неконтролируемый пал сухой травы;</li>
+                        <li>Оставленный на солнце пластик и стеклянная тара (эффект линзы).</li>
+                    </ul>
+                </div>
+                <button class="btn-next" onclick="showSlide(6)">Следующий вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide" id="slide6">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 3 • Природные ЧС</span>
+                    <h2>Как называется внезапный мощный поток воды со смесью обломков горных пород, грязи и тяжелых камней?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="showSlide(7)">A) Оползень</button>
+                    <button class="btn-option" onclick="showSlide(7)">Б) Сель</button>
+                    <button class="btn-option" onclick="showSlide(7)">В) Лавина</button>
+                    <button class="btn-option" onclick="showSlide(7)">Г) Наводнение</button>
+                </div>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide" id="slide7">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <div class="correct-header">✓ Правильный ответ: Б) Сель</div>
+                    <p><strong>Характеристики:</strong></p>
+                    <ul>
+                        <li>Обладает колоссальной разрушительной силой;</li>
+                        <li>Движется со скоростью до 10 м/с;</li>
+                        <li>Вызывается ливнями или бурным таянием ледников в горах.</li>
+                    </ul>
+                </div>
+                <button class="btn-next" onclick="showSlide(8)">Следующий вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide" id="slide8">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 4 • Теория безопасности</span>
+                    <h2>Как называется влияние психологических и физических качеств человека на его работу и решения?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="showSlide(9)">A) Человеческий фактор</button>
+                    <button class="btn-option" onclick="showSlide(9)">Б) Синдром выгорания</button>
+                    <button class="btn-option" onclick="showSlide(9)">В) Профессиональный риск</button>
+                    <button class="btn-option" onclick="showSlide(9)">Г) Социальная инженерия</button>
+                </div>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="slide" id="slide9">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <div class="correct-header">✓ Правильный ответ: А) Человеческий фактор</div>
+                    <p><strong>Масштаб проблемы:</strong></p>
+                    <ul>
+                        <li>До 70–80% аварий в сложных отраслях происходят из-за действий персонала;</li>
+                        <li>Сочетает в себе внимательность, усталость, эмоции и реакцию в стрессе.</li>
+                    </ul>
+                </div>
+                <button class="btn-next" onclick="showSlide(10)">Следующий вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 10 -->
+    <div class="slide" id="slide10">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 5 • Первая помощь</span>
+                    <h2>Какое первое и самое важное действие нужно совершить при термическом ожоге I или II степени?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="showSlide(11)">A) Смазать место ожога маслом или жиром</button>
+                    <button class="btn-option" onclick="showSlide(11)">Б) Охлаждать проточной холодной водой 10–15 минут</button>
+                    <button class="btn-option" onclick="showSlide(11)">В) Проколоть пузыри и обработать спиртом</button>
+                    <button class="btn-option" onclick="showSlide(11)">Г) Наложить тугую давящую повязку</button>
+                </div>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 11 -->
+    <div class="slide" id="slide11">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <div class="correct-header">✓ Правильный ответ: Б) Охлаждать водой</div>
+                    <p><strong>Медицинские рекомендации:</strong></p>
+                    <ul>
+                        <li>Вода снимает температуру тканей и останавливает ожог;</li>
+                        <li>Категорически нельзя мазать маслом: оно задерживает тепло внутри и провоцирует инфекцию.</li>
+                    </ul>
+                </div>
+                <button class="btn-next" onclick="showSlide(12)">Следующий вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 12 -->
+    <div class="slide" id="slide12">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 6 • Безопасность при ЧС</span>
+                    <h2>Что является основным правилом поведения при неожиданном начале землетрясения внутри здания?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="showSlide(13)">A) Быстро воспользоваться лифтом</button>
+                    <button class="btn-option" onclick="showSlide(13)">Б) Выбежать на балкон</button>
+                    <button class="btn-option" onclick="showSlide(13)">В) Укрыться под прочным столом или в проеме</button>
+                    <button class="btn-option" onclick="showSlide(13)">Г) Подняться на верхний этаж</button>
+                </div>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 13 -->
+    <div class="slide" id="slide13">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <div class="correct-header">✓ Правильный ответ: В) Укрыться под столом</div>
+                    <p><strong>Правила эвакуации:</strong></p>
+                    <ul>
+                        <li>Стол защищает от падающих обломков штукатурки и перекрытий;</li>
+                        <li>Лифты использовать строго запрещено из-за риска застрять при отключении света.</li>
+                    </ul>
+                </div>
+                <button class="btn-next" onclick="showSlide(14)">Следующий вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 14 -->
+    <div class="slide" id="slide14">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 7 • Поведение в толпе</span>
+                    <h2>Как правильно действовать, если вы случайно оказались в движущейся паникующей толпе?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="showSlide(15)">A) Двигаться против движения толпы</button>
+                    <button class="btn-option" onclick="showSlide(15)">Б) Идти по течению, согнув руки в локтях к груди</button>
+                    <button class="btn-option" onclick="showSlide(15)">В) Нагнуться, чтобы поднять упавшие вещи</button>
+                    <button class="btn-option" onclick="showSlide(15)">Г) Ухватиться за столб или ограждение</button>
+                </div>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 15 -->
+    <div class="slide" id="slide15">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <div class="correct-header">✓ Правильный ответ: Б) Идти по течению с согнутыми руками</div>
+                    <p><strong>Физика толпы:</strong></p>
+                    <ul>
+                        <li>Защищенная грудная клетка позволяет дышать при давлении;</li>
+                        <li>Падение или остановка в потоке смертельно опасны из-за риска быть растоптанным.</li>
+                    </ul>
+                </div>
+                <button class="btn-next" onclick="showSlide(16)">Финальный вопрос &rarr;</button>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 16 -->
+    <div class="slide" id="slide16">
+        <div class="split-layout">
+            <div class="content-side">
+                <div>
+                    <span class="badge">Вопрос 8 • Финал викторины</span>
+                    <h2>Как зовут нашего преподавателя по дисциплине «Безопасность жизнедеятельности человека» (БЖЧ)?</h2>
+                </div>
+                <div class="btn-grid">
+                    <button class="btn-option" onclick="showSlide(17)">A) Татьяна Николаевна</button>
+                    <button class="btn-option" onclick="showSlide(17)">Б) Юлия Владимировна</button>
+                    <button class="btn-option" onclick="showSlide(17)">В) Елена Александровна</button>
+                    <button class="btn-option" onclick="showSlide(17)">Г) Ольга Сергеевна</button>
+                </div>
+            </div>
+            <div class="image-side" style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Slide 17 -->
+    <div class="slide" id="slide17">
+        <div class="full-layout">
+            <div>
+                <div class="correct-header" style="justify-content: center;">✓ Правильный ответ: Б) Юлия Владимировна</div>
+                <img src="photo_5276451857142326120_y.jpg" alt="Фото преподавателя" class="teacher-photo" onerror="this.style.display='none'">
+                <p style="text-align: center; max-width: 600px; margin: 10px auto;"><strong>Успех в изучении безопасности начинается с уважения к преподавателю!</strong><br>Юлия Владимировна помогает нам освоить важнейшие жизненные навыки.</p>
+            </div>
+            <button class="btn-next" onclick="showSlide(1)" style="margin: 20px auto 0 auto; background: var(--success);">Пройти викторину заново ↺</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function showSlide(n) {
+        document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+        document.getElementById('slide' + n).classList.add('active');
+    }
+</script>
+</body>
+</html>
